@@ -3,7 +3,13 @@ from google.genai import types
 
 # Setup Sidebar to enter API Key (for testing convenience)
 # api_key = st.sidebar.text_input("Enter Google API Key", type="password")
-client = genai.Client(api_key="AIzaSyD67QxAZKuonLKHPTllrwZXvlGkCLNkg4Q")
+
+# read api key from .env file
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 config=types.GenerateContentConfig(
         thinking_config=types.ThinkingConfig(thinking_level="low")
