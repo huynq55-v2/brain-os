@@ -12,7 +12,7 @@ load_dotenv()
 client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 config=types.GenerateContentConfig(
-        thinking_config=types.ThinkingConfig(thinking_level="low")
+    thinking_config=types.ThinkingConfig(thinking_level="low")
 )
 
 def generate_content(prompt, schema):
@@ -20,7 +20,7 @@ def generate_content(prompt, schema):
     config.response_json_schema = schema.model_json_schema()
 
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3-flash-preview",
         contents=prompt,
         config=config
     )
