@@ -1,0 +1,354 @@
+{
+    "relation_types": [
+        {
+            "machine_name": "is_a",
+            "description": "Indicates that the source entity is a subclass or category of the target entity",
+            "category": "hierarchical",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Concept",
+                    "Object",
+                    "Process"
+                ],
+                "target": [
+                    "Concept"
+                ]
+            },
+            "properties_schema": {}
+        },
+        {
+            "machine_name": "instance_of",
+            "description": "Indicates that the source entity is a concrete instance of the target class",
+            "category": "hierarchical",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Object",
+                    "Person",
+                    "Organization",
+                    "Place"
+                ],
+                "target": [
+                    "Concept"
+                ]
+            },
+            "properties_schema": {}
+        },
+        {
+            "machine_name": "part_of",
+            "description": "Indicates that the source entity is a component or part of the target entity",
+            "category": "structural",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Object",
+                    "Concept"
+                ],
+                "target": [
+                    "Object",
+                    "Concept"
+                ]
+            },
+            "properties_schema": {}
+        },
+        {
+            "machine_name": "leads_to",
+            "description": "Indicates a non-deterministic causal tendency where one entity increases the likelihood of another",
+            "category": "causal",
+            "directional": true,
+            "deterministic": false,
+            "allowed_entity_types": {
+                "source": [
+                    "Concept",
+                    "Process",
+                    "Event"
+                ],
+                "target": [
+                    "Concept",
+                    "Event",
+                    "Condition"
+                ]
+            },
+            "properties_schema": {
+                "probability": {
+                    "type": "enum",
+                    "values": [
+                        "low",
+                        "medium",
+                        "high"
+                    ]
+                },
+                "temporal_lag": {
+                    "type": "enum",
+                    "values": [
+                        "immediate",
+                        "short_term",
+                        "long_term"
+                    ]
+                },
+                "context": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "machine_name": "causes",
+            "description": "Indicates that the source entity directly and deterministically causes the target entity",
+            "category": "causal",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Event",
+                    "Process"
+                ],
+                "target": [
+                    "Event",
+                    "Condition"
+                ]
+            },
+            "properties_schema": {
+                "context": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "machine_name": "requires",
+            "description": "Indicates that the source entity cannot exist or function without the target entity",
+            "category": "dependency",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Process",
+                    "System",
+                    "Concept"
+                ],
+                "target": [
+                    "Concept",
+                    "Object",
+                    "Condition"
+                ]
+            },
+            "properties_schema": {
+                "requirement_type": {
+                    "type": "enum",
+                    "values": [
+                        "logical",
+                        "structural",
+                        "resource"
+                    ]
+                }
+            }
+        },
+        {
+            "machine_name": "enables",
+            "description": "Indicates that the source entity facilitates or makes the target entity possible",
+            "category": "causal",
+            "directional": true,
+            "deterministic": false,
+            "allowed_entity_types": {
+                "source": [
+                    "Concept",
+                    "Process",
+                    "Object"
+                ],
+                "target": [
+                    "Process",
+                    "Event"
+                ]
+            },
+            "properties_schema": {
+                "strength": {
+                    "type": "enum",
+                    "values": [
+                        "weak",
+                        "moderate",
+                        "strong"
+                    ]
+                }
+            }
+        },
+        {
+            "machine_name": "precedes",
+            "description": "Indicates that the source entity occurs before the target entity in time",
+            "category": "temporal",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Event",
+                    "Process"
+                ],
+                "target": [
+                    "Event",
+                    "Process"
+                ]
+            },
+            "properties_schema": {
+                "temporal_gap": {
+                    "type": "enum",
+                    "values": [
+                        "immediate",
+                        "short",
+                        "long"
+                    ]
+                }
+            }
+        },
+        {
+            "machine_name": "occurs_during",
+            "description": "Indicates that the source entity occurs within the temporal span of the target entity",
+            "category": "temporal",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Event",
+                    "Process"
+                ],
+                "target": [
+                    "Event",
+                    "Process"
+                ]
+            },
+            "properties_schema": {}
+        },
+        {
+            "machine_name": "used_for",
+            "description": "Indicates the intended purpose or function of the source entity",
+            "category": "functional",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Object",
+                    "Concept"
+                ],
+                "target": [
+                    "Process",
+                    "Goal"
+                ]
+            },
+            "properties_schema": {}
+        },
+        {
+            "machine_name": "produces",
+            "description": "Indicates that the source entity actively creates or generates the target entity",
+            "category": "functional",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Process",
+                    "Agent",
+                    "Organization"
+                ],
+                "target": [
+                    "Object",
+                    "Outcome"
+                ]
+            },
+            "properties_schema": {}
+        },
+        {
+            "machine_name": "similar_to",
+            "description": "Indicates that two entities share significant characteristics or features",
+            "category": "comparative",
+            "directional": true,
+            "deterministic": false,
+            "allowed_entity_types": {
+                "source": [
+                    "Concept",
+                    "Object"
+                ],
+                "target": [
+                    "Concept",
+                    "Object"
+                ]
+            },
+            "properties_schema": {
+                "similarity_basis": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "machine_name": "supports",
+            "description": "Indicates that the source entity provides evidence or justification for the target entity",
+            "category": "argumentative",
+            "directional": true,
+            "deterministic": false,
+            "allowed_entity_types": {
+                "source": [
+                    "Concept",
+                    "Evidence"
+                ],
+                "target": [
+                    "Claim",
+                    "Concept"
+                ]
+            },
+            "properties_schema": {
+                "support_strength": {
+                    "type": "enum",
+                    "values": [
+                        "weak",
+                        "moderate",
+                        "strong"
+                    ]
+                }
+            }
+        },
+        {
+            "machine_name": "disputes",
+            "description": "Indicates that the source entity challenges or argues against the target entity",
+            "category": "argumentative",
+            "directional": true,
+            "deterministic": false,
+            "allowed_entity_types": {
+                "source": [
+                    "Concept",
+                    "Claim"
+                ],
+                "target": [
+                    "Claim",
+                    "Concept"
+                ]
+            },
+            "properties_schema": {
+                "dispute_type": {
+                    "type": "enum",
+                    "values": [
+                        "contradiction",
+                        "limitation",
+                        "counterexample"
+                    ]
+                }
+            }
+        },
+        {
+            "machine_name": "located_at",
+            "description": "Indicates the physical or conceptual location of the source entity",
+            "category": "spatial",
+            "directional": true,
+            "deterministic": true,
+            "allowed_entity_types": {
+                "source": [
+                    "Object",
+                    "Organization",
+                    "Event"
+                ],
+                "target": [
+                    "Place"
+                ]
+            },
+            "properties_schema": {}
+        }
+    ]
+}
