@@ -20,7 +20,7 @@ def generate_content(prompt, schema):
     config.response_json_schema = schema.model_json_schema()
 
     response = client.models.generate_content(
-        model="gemini-3-flash-preview",
+        model="gemini-2.5-flash",
         contents=prompt,
         config=config
     )

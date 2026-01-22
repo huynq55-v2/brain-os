@@ -1,7 +1,7 @@
 import streamlit as st
 from client import generate_content
 from .models import ExtractionResult
-from .prompts import get_entity_extraction_prompt, get_relation_extraction_prompt, get_combined_extraction_prompt
+from .prompts import get_combined_extraction_prompt
 
 def _build_type_constraints() -> str:
     type_list = []
